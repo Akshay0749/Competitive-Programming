@@ -1,0 +1,20 @@
+Let Z
+ be the number of integers in [0,k−1]
+ that are missing from the array, and let C
+ be the number of elements equal to k
+.
+
+To make MEX(a)=k
+, every number from 0
+ to k−1
+ must appear, which costs Z
+ operations. Also, k
+ must not appear in the array, so we need C
+ operations to remove them. While removing copies of k
+, we can directly replace them with missing numbers, so the total number of operations is the maximum of these two values.
+
+Thus, the answer is: ans=max(Z,C)
+.
+
+The time complexity is O(n)
+ per test case

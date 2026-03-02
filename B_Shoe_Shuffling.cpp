@@ -1,0 +1,98 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ent endl
+typedef long long ll;
+typedef long double ld;
+
+typedef vector<int> vi;
+typedef vector<ld> vd;
+typedef vector<ll> vl;
+
+#define FOR(i, a, b) for (int i=a; i<(b); i++)
+#define F0R(i, a) for (int i=0; i<(a); i++)
+#define FORd(i,a,b) for (int i = (b)-1; i >= a; i--)
+#define F0Rd(i,a) for (int i = (a)-1; i >= 0; i--)
+#define trav(a,x) for (auto& a : x)
+#define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
+
+// Problem Statement
+/*
+    
+*/
+
+// Small Observatins
+/*
+    After shuffling
+        shoe size must be equal to his shoe size or greater than that   
+    firstly u would sort the array
+
+    NO when.. maximum element is not 2 times in the array
+        in that case it wuld be no only..
+            .. the maximum element in the array shuld occur min of 2 times else no
+    
+    all reamining cases wuld be yes
+        .. just print the shuffled indices from 1. i.e, the permutautions
+    freq shuld be minimum of 3 of max elt
+
+    cnt of every elt shuld be minimum of 2
+ 
+*/
+
+// Claims on algo 
+/*  
+    
+ 
+*/
+
+void solve() {
+    ll n; cin >> n;
+    vl a(n);
+    map<ll, ll> f;
+    F0R(i, n){
+        cin >> a[i];
+        f[a[i]]++;
+    }
+    for(auto x : f){
+        if(x.second >= 2) continue;
+        else{
+            cout << -1 << ent;
+            return;
+        }
+    }
+    // now shuffling is possible
+    vl v;
+    ll ce = 0;
+    for(auto x : f){
+        v.push_back(x.second + ce);
+        ll t = x.second - 1;
+        ce++;
+        // now insert 1 to tp
+        while(t--){
+            v.push_back(ce++);
+        }
+    }
+    trav(x, v) cout << x << ' ';
+    cout << ent;
+}
+
+// Golden Rules
+/*
+    Solutions are simple.
+
+    Proofs are simple.
+
+    Implementations are simple.
+*/
+
+int main() {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+
+    int T = 1;
+    cin >> T;
+    while(T--) {
+        solve();
+    }
+
+    return 0;
+}
