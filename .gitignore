@@ -1,0 +1,14 @@
+# Ignore executables
+*.exe
+*.out
+*.bin
+
+# Ignore temp files
+temp*
+*.class
+
+# Ignore VS Code
+.vscode/
+
+# Ignore compiled C++
+*.o
