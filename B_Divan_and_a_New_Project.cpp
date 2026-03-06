@@ -16,13 +16,54 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+// Problem Statement
+/*
+    
+*/
+
+// Small Observatins
+/*
+ 
+*/
+
+/*
+ 
+*/
+
+// Claims on algo 
+
+/*  
+    x0 -> headquarter
+
+    headquarter  * |x0 - xi| * ai --> shuld be minimized
+
+    where xi's will be coordinates which will be unique
+
+    5
+    3 8 10 6 1
+
+    what if I place headquarter at x = 0   .. No I cant
+
+    where u could place the headqiarter so the walking distance wuld be minimum
+    
+*/
+
 void solve() {
-    ll n;
-    cin >> n;
-    while(n % 2 == 0) n /= 2;
-    if(n > 1) cout << "YES" << ent;
-    else cout << "NO" << ent;
+    ll n; cin >> n;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+
+
 }
+
+// Golden Rules
+/*
+    Solutions are simple.
+
+    Proofs are simple.
+
+    Implementations are simple.
+*/
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
@@ -33,5 +74,5 @@ int main() {
         solve();
     }
 
-        return 0;
+    return 0;
 }

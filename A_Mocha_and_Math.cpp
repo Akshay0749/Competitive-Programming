@@ -16,13 +16,44 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+// Problem Statement
+/*
+    
+*/
+
+// Small Observatins
+/*
+ 
+*/
+
+/*
+ 
+*/
+
+// Claims on algo 
+/*  
+    
+ 
+*/
+
 void solve() {
-    ll n;
-    cin >> n;
-    while(n % 2 == 0) n /= 2;
-    if(n > 1) cout << "YES" << ent;
-    else cout << "NO" << ent;
+    ll n; cin >> n;
+    vl a(n); F0R(i, n) cin >> a[i];
+    ll ans = a[n - 1];
+    F0R(i, n - 1) {
+        ans = a[i] & ans;
+    }
+    cout << ans << ent;
 }
+
+// Golden Rules
+/*
+    Solutions are simple.
+
+    Proofs are simple.
+
+    Implementations are simple.
+*/
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
@@ -33,5 +64,5 @@ int main() {
         solve();
     }
 
-        return 0;
+    return 0;
 }
