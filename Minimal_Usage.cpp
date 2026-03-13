@@ -23,7 +23,7 @@ typedef vector<ll> vl;
 
 // Small Observatins
 /*
- 1 2 3 4 5 6 7 8
+ 
 */
 
 /*
@@ -32,20 +32,13 @@ typedef vector<ll> vl;
 
 // Claims on algo 
 /*  
-    1 3 3
-
+    s/k - 1??   
  
 */
 
 void solve() {
-    ll a, b, c; cin >> a >> b >> c;
-    // ll left =  b - (2 * a);
-    // if(a == b && b == c) cout << "No" << ent;
-    // if(left == 0 && c / )
-    if(b == (2 * a) + (c / 3) && c % 3 == 0 )cout << "Yes" << ent;
-    // if(c % 3 == 0 && ((b - (c / 3)) % 2 == 0) && (((b - c / 3) / 2) % a == 0 && b - (c / 3) != 0 )) cout << "Yes" << ent;
-    else cout << "No" << ent;
-   
+    ll n, k, s, m;
+    cin >> n >> k >> s >> m;
 }
 
 // Golden Rules
