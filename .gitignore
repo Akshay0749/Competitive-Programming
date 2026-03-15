@@ -12,3 +12,8 @@ temp*
 
 # Ignore compiled C++
 *.o
+
+# CP helper files
+.cph/
+build/
+*.prob
