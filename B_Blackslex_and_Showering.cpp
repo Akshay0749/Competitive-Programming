@@ -40,44 +40,16 @@ void solve() {
     ll n; cin >> n;
     vl a(n);
     F0R(i, n) cin >> a[i];
-    ll min_index = 0, md = INT64_MIN, x = 0
-    FOR(i, 1, n - 1){
-        ll x = abs(a[i] - a[i + 1]) + abs(a[i] -  a[i - 1]);
-        ll y = abs(a[i + 1] - a[i - 1]);
-        if(y < x) {
-            md = max(md, x - y);
-            if(md == (x - y)){
-                x = i;
-            }
-        }
+    ll sm = 0;
+    F0R(i, n - 1) {
+        sm += abs(a[i] - a[i + 1]);
     }
-
-    ll ans1 = 0;
-    F0R(i, n){
-        if(i == min_index){
-            continue;
-        }
-        ans1+=abs(a[i] - a[i - 1]);
-    }   
-    ll ans2 = 0;
-    min_index = 0;
-    F0R(i, n){
-        if(i == min_index){
-            continue;
-        }
-        ans2+=abs(a[i] - a[i - 1]);
+    ll res = LLONG_MAX;
+    F0R(i, n - 1) {
+        res = min(res, sm - abs(a[i] - a[i + 1]) - (i != 0 ? abs(a[i] - a[i - 1]) : 0) + (i != 0 ? abs(a[i - 1] - a[i + 1]): 0));
     }
-    ll ans3 = 0;
-    min_index = n - 1;
-        F0R(i, n){
-        if(i == min_index){
-            continue;
-        }
-        ans3+=abs(a[i] - a[i - 1]);
-    }
-    ll ans = min(ans1, ans2);
-    ans = min(ans, ans3);
-    cout << ans << ent;
+    res = min(res, sm - abs(a[n - 2] - a[n - 1]));
+    cout << res << ent;
 }
 
 // Golden Rules

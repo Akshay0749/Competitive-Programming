@@ -31,15 +31,24 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    
+ 
+*/
 
 void solve() {
     ll n; cin >> n;
     vl a(n);
     F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
-    sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    stack<ll> st;
+    F0Rd(i, n) {
+        ll curr = a[i];
+        while(!st.empty() && st.top() == curr + 1) {
+            st.pop();
+        }
+        st.push(curr);
+    }
+    cout << st.size() << ent;
 }
 
 // Golden Rules

@@ -10,11 +10,22 @@ typedef vector<ld> vd;
 typedef vector<ll> vl;
 
 #define FOR(i, a, b) for (int i=a; i<(b); i++)
-#define F0R(i, a) for (int i=0; i<(a); i++)
+#define F0R(i, a) for (i=0; i<(a); i++)
 #define FORd(i,a,b) for (int i = (b)-1; i >= a; i--)
 #define F0Rd(i,a) for (int i = (a)-1; i >= 0; i--)
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
+
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
 
 // Problem Statement
 /*
@@ -31,15 +42,25 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    
+ 
+*/
 
 void solve() {
-    ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
-    sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    string s; cin >> s;
+    ll n = s.length();
+    set<char> st;
+    bool check = true;
+    ll i;
+    F0R(i, n) {
+        if(st.find(s[i]) == st.end()) st.insert(s[i]);
+        else break;
+    }
+    FOR(j, i, n) {
+        if(s[j] != s[j - i]) check = false;
+    }
+    cout << (check ? "YES" : "NO") << ent;
 }
 
 // Golden Rules

@@ -16,6 +16,17 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
+
 // Problem Statement
 /*
     
@@ -31,55 +42,41 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
 /*  
-    x0 -> headquarter
-
-    2  * |x0 - xi| * ai --> shuld be minimized
-
-    where xi's will be coordinates which will be unique
-
-    5
-    3 8 10 6 1
-
-    what if I place headquarter at x = 0   .. No I cant
-
-    where u could place the headqiarter so the walking distance wuld be minimum
     
+ 
 */
 
 void solve() {
     ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    vl b = a;
-    sort(b.begin(), b.end());
-    map<ll, vl> mp;
-    ll cur = 1;
-    bool f = true;
-    F0Rd(i, n) {
-        if(f) {
-            mp[b[i]].push_back(cur);
-            f = false;
-        }
-        else {
-            mp[b[i]].push_back(-cur);
-            ++cur;
-            f = true;
-        }
-    }
-    ll ans = 0;
-    vl res;
-    res.push_back(0);
+    vector<pair<ll, ll>> a(n);
     F0R(i, n) {
-        res.push_back(mp[a[i]].back());
-        mp[a[i]].pop_back();
+        ll x; cin >> x;
+        a[i].first = x;
+        a[i].second = i;
     }
-    FOR(i, 1, n + 1) {
-        ans += 2 * abs(res[0] - res[i]) * a[i - 1];
+    vl ans(n);
+    vl pf(n);
+    ll cur = 0;
+    sort(a.begin(), a.end());
+    F0R(i, n) {
+        cur += a[i].first;
+        pf[i] = cur;
     }
-    cout << ans << ent;
-    trav(it, res) cout << it << ' ';
+    F0R(i, n) {
+        ll found = i;
+        ll j = i;
+        while(j < n) {
+            pair<ll, ll> temp = {pf[j] + 1, LLONG_MIN};
+            ll idx = lower_bound(a.begin(), a.end(), temp) - a.begin(); 
+            idx--;
+            if(idx == j) break;
+            found += idx - j;
+            j = idx;
+        }
+        ans[a[i].second] = found;
+    }
+    trav(x, ans) cout << x << ' ';
     cout << ent;
 }
 

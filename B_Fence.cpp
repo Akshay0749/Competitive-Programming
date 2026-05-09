@@ -31,15 +31,34 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
+/*  
+    just maintain the window of size k and slide from l to r
 
+ 
+*/
 
 void solve() {
-    ll n; cin >> n;
+    ll n, k; cin >> n >> k;
     vl a(n);
     F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
-    sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    ll ind = 1, currSum = 0, minSum = LLONG_MAX;
+    F0R(i, k) currSum += a[i];
+    minSum = currSum;
+    ll l = 0, r = k - 1;
+    while(r <= n - 1) {
+        ll windowSum = currSum;
+        windowSum -= a[l];
+        ++l;
+        ++r;
+        if(r == n) break;
+        windowSum += a[r];
+        if(windowSum < minSum) {
+            ind = l + 1;
+            minSum = windowSum;
+        }
+        currSum = windowSum;
+    }
+    cout << ind;
 }
 
 // Golden Rules
@@ -55,7 +74,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

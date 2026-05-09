@@ -16,6 +16,17 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
+
 // Problem Statement
 /*
     
@@ -31,15 +42,36 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    just a[i] shuld have a[i + 1] || a[i - 1]
+        .. that's it..
+ 
+*/
 
 void solve() {
     ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
+    vl a(n); F0R(i, n) cin >> a[i];
+    ll m; cin >> m;
+    vl b(m); F0R(i, m) cin >> b[i];
+    map<ll, ll> mp2;
+    F0R(i, m) mp2[b[i]]++;
+    ll ans = 0;
     sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    F0R(i, n) {
+        if(mp2[a[i] - 1] != 0) {
+            mp2[a[i] - 1]--;
+            ans++;
+        }
+        else if(mp2[a[i]] != 0) {
+           mp2[a[i]]--;
+           ans++; 
+        }
+        else if(mp2[a[i] + 1] != 0) {
+            mp2[a[i] + 1]--;
+            ans++;   
+        }
+    }
+    cout << ans;
 }
 
 // Golden Rules
@@ -55,7 +87,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    cin >> T;
+    //cin >> T;
     while(T--) {
         solve();
     }

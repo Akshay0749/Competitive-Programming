@@ -31,15 +31,29 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    
+ 
+*/
 
 void solve() {
-    ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
-    sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    ll n, k; cin >> n >> k;
+    ll ans = 0;
+    ll l = 1, r = 2 * k;
+
+    while(l <= r) {
+        ll mid = l + (r - l) / 2;
+
+        ll cnt = mid - (mid / n); // no. of valid numbers means that are not / by n
+
+        if(cnt >= k) {
+            ans = mid;
+            r = mid - 1;
+        }
+        else l = mid + 1;
+    }
+    cout << ans << ent;
+   
 }
 
 // Golden Rules

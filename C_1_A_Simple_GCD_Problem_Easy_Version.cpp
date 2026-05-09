@@ -31,15 +31,26 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    
+ 
+*/
+ll lcm(ll a, ll b) { 
+    return a / __gcd(a, b) * b;
+}
 
 void solve() {
-    ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
-    sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+   ll n; cin >> n;
+   vl a(n), b(n);
+   F0R(i, n) cin >> a[i];
+   F0R(i, n) cin >> b[i];
+   ll ans = 0;
+   F0R(i, n) {
+    ll gl = (i > 0) ? __gcd(a[i - 1], a[i]) : 1;
+    ll gr = (i < n - 1) ? __gcd(a[i + 1], a[i]) : 1;
+    if(lcm(gl, gr) < a[i]) ans++;
+   }
+   cout << ans << endl;
 }
 
 // Golden Rules

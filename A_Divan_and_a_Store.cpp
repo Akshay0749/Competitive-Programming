@@ -16,6 +16,17 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
+
 // Problem Statement
 /*
     
@@ -31,15 +42,27 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
+/*  
+    
+ 
+*/
 
 void solve() {
-    ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    ll mie = *min_element(a.begin(), a.end());
+    ll n, l, r, k; cin >> n >> l >> r >> k;
+    vl a;
+    F0R(i, n) {
+        ll x; cin >> x;
+        if(x >= l && x <= r) a.push_back(x);
+    }
     sort(a.begin(), a.end());
-    cout << max(mie, a[1] - mie) << ent;
+    ll ans = 0;
+    F0R(i, a.size()) {
+        if(k == 0) break;
+        if(k - a[i] < 0) break;
+        ans++;
+        k -= a[i];
+    }
+    cout << ans << ent;
 }
 
 // Golden Rules

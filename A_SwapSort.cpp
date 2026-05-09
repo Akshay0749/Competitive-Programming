@@ -16,6 +16,17 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
+
 // Problem Statement
 /*
     
@@ -31,56 +42,43 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
 /*  
-    x0 -> headquarter
-
-    2  * |x0 - xi| * ai --> shuld be minimized
-
-    where xi's will be coordinates which will be unique
-
-    5
-    3 8 10 6 1
-
-    what if I place headquarter at x = 0   .. No I cant
-
-    where u could place the headqiarter so the walking distance wuld be minimum
     
+ 
 */
 
 void solve() {
     ll n; cin >> n;
-    vl a(n);
-    F0R(i, n) cin >> a[i];
-    vl b = a;
+
+    vl a(n), b(n);
+    F0R(i, n) {
+        cin >> a[i];
+        b[i] = a[i];
+    }
     sort(b.begin(), b.end());
-    map<ll, vl> mp;
-    ll cur = 1;
-    bool f = true;
-    F0Rd(i, n) {
-        if(f) {
-            mp[b[i]].push_back(cur);
-            f = false;
+    vector<pair<ll, ll>> v;
+    ll p = 0;
+    while(a != b) {
+        if(a[p] == b[p]) {
+            p++;
         }
         else {
-            mp[b[i]].push_back(-cur);
-            ++cur;
-            f = true;
+            ll ind = -1;
+            for(int i = p; i < n; i++) {
+                if(a[i] == b[p]) {
+                    ind = i;
+                    break;
+                }   
+            }
+            v.push_back({p, ind});
+            swap(a[p], a[ind]);
+            p++;
         }
     }
-    ll ans = 0;
-    vl res;
-    res.push_back(0);
-    F0R(i, n) {
-        res.push_back(mp[a[i]].back());
-        mp[a[i]].pop_back();
+    cout << v.size() << ent;
+    for(auto it : v) {
+        cout << it.first << ' ' << it.second << ent;
     }
-    FOR(i, 1, n + 1) {
-        ans += 2 * abs(res[0] - res[i]) * a[i - 1];
-    }
-    cout << ans << ent;
-    trav(it, res) cout << it << ' ';
-    cout << ent;
 }
 
 // Golden Rules
@@ -96,7 +94,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

@@ -16,6 +16,17 @@ typedef vector<ll> vl;
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
+
 // Problem Statement
 /*
     
@@ -31,56 +42,48 @@ typedef vector<ll> vl;
 */
 
 // Claims on algo 
-
 /*  
-    x0 -> headquarter
 
-    2  * |x0 - xi| * ai --> shuld be minimized
-
-    where xi's will be coordinates which will be unique
-
-    5
-    3 8 10 6 1
-
-    what if I place headquarter at x = 0   .. No I cant
-
-    where u could place the headqiarter so the walking distance wuld be minimum
+check even first then odd
     
+ 
 */
 
 void solve() {
     ll n; cin >> n;
     vl a(n);
     F0R(i, n) cin >> a[i];
-    vl b = a;
-    sort(b.begin(), b.end());
-    map<ll, vl> mp;
-    ll cur = 1;
-    bool f = true;
-    F0Rd(i, n) {
-        if(f) {
-            mp[b[i]].push_back(cur);
-            f = false;
+    ll prev = 0;
+    // even
+    for(int i = 1; i < n; i+=2) {
+        prev = __gcd(prev ,a[i]);
+    }
+    //odd
+    ll prevO = 0;
+    for(int i = 0; i < n; i+=2) {
+        prevO = __gcd(prevO, a[i]);
+    }
+    bool check1 = true;
+    for(int i = 0; i < n - 1; i ++ ) {
+        if(a[i] % prev == a[i + 1] % prev) {
+            check1 = false;
+            break;
         }
-        else {
-            mp[b[i]].push_back(-cur);
-            ++cur;
-            f = true;
+    }
+    bool check2 = true;
+    for(int i = 0; i < n - 1; i ++ ) {
+        if(a[i] % prevO == a[i + 1] % prevO) {
+            check2 = false;
+            break;
         }
     }
-    ll ans = 0;
-    vl res;
-    res.push_back(0);
-    F0R(i, n) {
-        res.push_back(mp[a[i]].back());
-        mp[a[i]].pop_back();
+    if(check1) {
+        cout << prev << ent;
     }
-    FOR(i, 1, n + 1) {
-        ans += 2 * abs(res[0] - res[i]) * a[i - 1];
+    else if(check2) {
+        cout << prevO  << ent;
     }
-    cout << ans << ent;
-    trav(it, res) cout << it << ' ';
-    cout << ent;
+    else cout << 0 << ent;
 }
 
 // Golden Rules
