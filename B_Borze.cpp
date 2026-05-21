@@ -48,19 +48,22 @@ ll nCr(long long n, long long r) {
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    string s; cin >> s;
+    string ans = "";
+    int i;
+    for(i = 0; i < s.length() - 1; i++) {
+        if(s[i] == '.') ans += '0';
+        else if(s[i] == '-' && s[i + 1] == '.') {
+            ans += '1';
+            ++i;
+        }
+        else if(s[i] == '-' && s[i + 1] == '-') {
+            ans += '2';
+            ++i;
+        }
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    if(s[i] == '.') ans += '0';
+    cout << ans;
 }
 
 // Golden Rules
@@ -76,7 +79,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

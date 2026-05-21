@@ -35,31 +35,62 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ how can I insert element in an array in O(1) in sorted order..
+    or just insert by bs 
 
-/*
+    so How can I optimize it??
+        this is just an optimization problem..
+
+
+ 
  
 */
 
 // Claims on algo 
 /*  
-    
+
  
 */
+class MedianFinder {
+    priority_queue<int> maxLeft;
+    priority_queue<int, vector<int>, greater<int>> minRight;
+public:
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        if(maxLeft.empty() || num <= maxLeft.top()) {
+            maxLeft.push(num);
+        }
+        else minRight.push(num);
+        //balance the heaps
+        if(maxLeft.size() > minRight.size() + 1) {
+            minRight.push(maxLeft.top());
+            maxLeft.pop();
+        }
+        else if(minRight.size() > maxLeft.size()) {
+            maxLeft.push(minRight.top());
+            minRight.pop();
+        }
+    }
+    
+    int findMedian() {
+        return maxLeft.top();
+    }
+};
 
 void solve() {
+    MedianFinder obj;
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    obj.addNum(n);
+    ll q; cin >> q;
+    while(q--) {
+        ll a, b; cin >> a >> b;
+        obj.addNum(a);
+        obj.addNum(b);
+        cout << obj.findMedian() << ent;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
    
 }
 
@@ -76,7 +107,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

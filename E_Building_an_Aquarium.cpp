@@ -8,6 +8,7 @@ typedef long double ld;
 typedef vector<int> vi;
 typedef vector<ld> vd;
 typedef vector<ll> vl;
+const int MOD = 1e9 + 7;
 
 #define FOR(i, a, b) for (int i=a; i<(b); i++)
 #define F0R(i, a) for (int i=0; i<(a); i++)
@@ -35,9 +36,9 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -46,21 +47,30 @@ ll nCr(long long n, long long r) {
     
  
 */
-
+bool check(vector<ll> &a, ll w, ll h) {
+    for(auto it : a) {
+        if(it < h) w -= (h - it);
+    }
+    if(w >= 0) return true;
+    return false;
+}   
+ 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    ll n, x; cin >> n >> x;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+    ll ans = LLONG_MIN;
+    ll l = *min_element(a.begin(), a.end());
+    ll r = *max_element(a.begin(), a.end()) + x;
+    while(l <= r) {
+        ll mid = l + (r - l) / 2;
+        if(check(a, x, mid)) {
+            ans = max(ans, mid);
+            l = mid + 1;
+        }
+        else r = mid - 1;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << ans << ent;
 }
 
 // Golden Rules
@@ -76,7 +86,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

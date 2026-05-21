@@ -43,24 +43,34 @@ ll nCr(long long n, long long r) {
 
 // Claims on algo 
 /*  
-    
+    0 1 1 1 1 1
+
+    use the teleporter which is near and has less cost
+
+    pair{cost, dist from 0}
  
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
+    ll n, c; cin >> n >> c;
+    vector<ll> a;
     F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+        ll x; cin >> x;
+        a.push_back(x + i + 1);
+    }    
+    sort(a.begin(), a.end());
+    ll ans = 0;
+    ll i = 0;
+    while(c > 0 && i < n) {
+        if(c <= 0) break;
+        c -= a[i];
+        if(c >= 0) ++ans;
+        else {
+            break;
+        }
+        ++i;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << ans << ent;
 }
 
 // Golden Rules
@@ -76,7 +86,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

@@ -35,9 +35,9 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -48,19 +48,51 @@ ll nCr(long long n, long long r) {
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
+    ll n, u; cin >> n >> u;
+    ll curr = 0;
+    vl a(n), b(n), c(n); 
     F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+        cin >> a[i];
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    F0R(i, n) {
+        cin >> b[i];
     }
-    else cout << "NO" << ent;
-   
+    F0R(i, n) {
+        cin >> c[i];
+    }
+    if(curr == u) {
+        cout << "Yes" << ent;
+        return;
+    }
+    if(a[0] > u && b[0] > u && c[0] > u) {
+        cout << "No" << ent;
+        return;
+    }
+    F0R(i, n) {
+    if((a[i] | u) > u) break;
+        if(a[i] <= u) curr |= a[i];
+        if(curr == u) {
+            cout << "Yes" << ent;
+            return;
+        }
+    }
+    F0R(i, n) {
+    if((b[i] | u) > u) break;
+        if(b[i] <= u) curr |= b[i];
+        if(curr == u) {
+            cout << "Yes" << ent;
+            return;
+        }
+    }
+    F0R(i, n) {
+    if((c[i] | u) > u) break;
+        if(c[i] <= u) curr |= c[i];
+        if(curr == u) {
+            cout << "Yes" << ent;
+            return;
+        }
+    }
+    cout << "No" << ent;
 }
 
 // Golden Rules
@@ -76,7 +108,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

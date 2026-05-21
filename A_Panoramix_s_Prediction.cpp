@@ -46,21 +46,30 @@ ll nCr(long long n, long long r) {
     
  
 */
+bool prime(ll n) {
+    if(n == 1) return false;
+    for(int i = 2; i * i <= n; i++) {
+        if(n % i == 0) return false;
+    }
+    return true;
+}
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    ll a, b; cin >> a >> b;
+    ll num = -1;
+    ll n = -1;
+    for(int i = a + 1; i <= 50; i++) {
+        if(prime(i)){
+            n = i;
+            break;
+        }
     }
-    if(a == 0 && b == 0 && c == 0) {
+    if(n == b) {
         cout << "YES" << ent;
     }
-    else cout << "NO" << ent;
-   
+    else {
+        cout << "NO" << ent;
+    }
 }
 
 // Golden Rules
@@ -76,7 +85,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

@@ -34,33 +34,32 @@ ll nCr(long long n, long long r) {
 
 // Small Observatins
 /*
- 
-*/
+    it would be something around large number
+        use 2 ptr
+            .. if l and r are eqal then just slide the ptr
 
-/*
  
 */
 
 // Claims on algo 
 /*  
     
- 
+
 */
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+    ll ans = 0;
+    ll l = 0, r = n - 1;
+    while (l < r) 
+    {
+        ans = __gcd(ans, abs(a[l] - a[r]));
+        ++l;
+        --r;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << ans << ent;
 }
 
 // Golden Rules
@@ -76,7 +75,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

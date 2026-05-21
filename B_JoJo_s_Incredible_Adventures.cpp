@@ -43,24 +43,47 @@ ll nCr(long long n, long long r) {
 
 // Claims on algo 
 /*  
-    
+    no. of consecutive 1's during rotation *  (no. of consecutive 1's during rotation - 1)
  
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    string s; cin >> s;
+    ll n = s.length();
+    if(s.length() == 1) {
+        if(s[0] == '1') cout << 1 << ent;
+        else cout << 0 << ent;
+        return;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    s += s;
+    // cout << s << ent;
+    ll cur = 0;
+    ll ans = 0;
+    F0R(i, s.length()) {
+        if(s[i] == '1') {
+            ++cur;
+        }
+        else {
+            ans = max(ans, cur);
+            cur = 0;
+        }
     }
-    else cout << "NO" << ent;
-   
+    ans = max(cur, ans);
+    ans = min(n, ans);  
+    // cout << ans << ent;
+    if(n == ans) {
+        cout << n * n << ent;
+        return;
+    }
+    if(n < 3) cout << ans << ent;
+    else {
+        if(ans % 2 != 0) {
+            cout << ((ans / 2) + 1) * ((ans / 2) + 1) << ent;
+        }
+        else {
+            cout << (ans / 2) * ((ans / 2) + 1) << ent;
+        }
+    }
 }
 
 // Golden Rules
@@ -76,7 +99,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

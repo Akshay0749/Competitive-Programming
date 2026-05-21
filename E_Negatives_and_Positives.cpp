@@ -49,18 +49,22 @@ ll nCr(long long n, long long r) {
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+    ll res = 0;
+    ll cnt = 0;
+    ll el = LLONG_MAX;
     F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+        res += abs(a[i]);
+        if(a[i] < 0) {
+            cnt++;
+        }
+        el = min(abs(a[i]), el);
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    if(cnt % 2 == 0) cout << res << ent;
+    else {
+        cout << res - 2 * el << ent;
     }
-    else cout << "NO" << ent;
-   
 }
 
 // Golden Rules
@@ -76,7 +80,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

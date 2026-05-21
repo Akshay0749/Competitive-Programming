@@ -43,24 +43,27 @@ ll nCr(long long n, long long r) {
 
 // Claims on algo 
 /*  
-    
+    just try
  
 */
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    vl a(n + 1);
+    FOR(i, 1, n + 1) cin >> a[i];
+    reverse(a.begin() + 1, a.end());
+    ll i = 1;
+    ll ans = 0;
+    while(i <= n) {
+        while(i <= n && a[i] == a[1]) {
+            i++;
+        }
+        if(i <= n) {
+            ans++;
+            i = (i - 1) * 2 + 1;
+        }
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << ans << ent;
 }
 
 // Golden Rules
@@ -76,7 +79,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

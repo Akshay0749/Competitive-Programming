@@ -43,24 +43,26 @@ ll nCr(long long n, long long r) {
 
 // Claims on algo 
 /*  
-    
+    if current is fair jsut print it
  
 */
 
+bool fair(ll n) {
+    ll t = n;
+    while(n > 0) {
+        ll num = n % 10;
+        if(num != 0 && t % num != 0) return false;
+        n /= 10;
+    }
+    return true;
+}  
+
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    while(!fair(n)) {
+        n++;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << n << ent; 
 }
 
 // Golden Rules
@@ -76,7 +78,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

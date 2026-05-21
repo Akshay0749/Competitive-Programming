@@ -35,9 +35,9 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -48,19 +48,44 @@ ll nCr(long long n, long long r) {
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    ll n, m; cin >> n >> m;
+    vector<vector<ll>> a(n, vector<ll>(m, 0));
+    if(n == 1 && m == 1) {
+        cout << 0 << ent;
+        return;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    else if(n == 1) {
+        cout << 1 << ' ';
+        for(int i = 1; i <= m - 2; i++) cout << 2 << ' ';
+        cout << 1 << ent;
+        return;
     }
-    else cout << "NO" << ent;
-   
+    else if(m == 1) {
+        cout << 1 << ent;
+        for(int i = 1; i <= n - 2; i++) cout << 2 << ent;
+        cout << 1 << ent;
+        return;
+    }
+    a[0][0] = 2; 
+    a[0][m - 1] = 2;
+    a[n - 1][0] = 2;
+    a[n - 1][m - 1] = 2;
+    for(int j = 1; j < m - 1; j++) a[0][j] = 3;
+    for(int i = 1; i < n - 1; i++) a[i][0] = 3;
+    for(int j = 1; j < m - 1; j++) a[n - 1][j] = 3;
+    for(int i = 1; i < n - 1; i++) a[i][m - 1] = 3;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(a[i][j] == 0) a[i][j] = 4;
+        }
+    }
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cout << a[i][j] << ' ';
+        }
+        cout << ent;
+    }
 }
 
 // Golden Rules
@@ -76,7 +101,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

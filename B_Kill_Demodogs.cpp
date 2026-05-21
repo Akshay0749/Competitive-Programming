@@ -34,10 +34,13 @@ ll nCr(long long n, long long r) {
 
 // Small Observatins
 /*
- 
-*/
-
-/*
+    each cell has i*j dogs
+        .. 
+        which cell will have maxm demodogs??
+         ..
+        cant do the brute
+            .. diff + 4 would be the next term
+        cant be brute but we can split it into 2 halfs
  
 */
 
@@ -46,21 +49,11 @@ ll nCr(long long n, long long r) {
     
  
 */
+const int mod = 1e9 + 7;
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
-    }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    cout << ((((n * (n + 1)) % mod) * (4 * n - 1)) % mod * 337) % mod << ent;
 }
 
 // Golden Rules
@@ -76,7 +69,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

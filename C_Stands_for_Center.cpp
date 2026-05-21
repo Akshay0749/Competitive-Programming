@@ -34,10 +34,14 @@ ll nCr(long long n, long long r) {
 
 // Small Observatins
 /*
- 
-*/
+BRUTE FORCE
+ i would need the np. of indices of c, 
+    .. then I would need to go to each indice of C and cnt the min of l and r chars
+    and that's easy by substracting n and 0 from it..
 
-/*
+ 
+
+ 
  
 */
 
@@ -48,19 +52,21 @@ ll nCr(long long n, long long r) {
 */
 
 void solve() {
-    ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
+    string s; cin >> s;
+    ll ans = 0;
+    ll n = s.length();
+    vl a;
     F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+        if(s[i] == 'C') a.push_back(i);
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
+    F0R(i, a.size()) {
+        ans++;
+        ll ind = a[i];
+        int a = abs(0 - ind);
+        int b = abs(n - ind - 1);
+        ans += min(a, b);
+    }   
+    cout << ans << ent;
 }
 
 // Golden Rules
@@ -76,7 +82,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    // cin >> T;
     while(T--) {
         solve();
     }

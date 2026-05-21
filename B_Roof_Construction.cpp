@@ -43,24 +43,24 @@ ll nCr(long long n, long long r) {
 
 // Claims on algo 
 /*  
-    
- 
+   just compute the xor's of larger elt's
+   the one which is maximum to the lhs is the answer 
+    so we got the answer but how we gonna print it???...
+
 */
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    ll ans = n - 1;
+    for(int i = n - 1; i >= 1; i--) {
+        ll x = i ^ (i - 1);
+        if(x >= ans) {
+            for(int j = ans - 1; j >= 0; j--) cout << j << ' ';
+            for(int k = ans; k <= n - 1; k++) cout << k << ent; 
+            return;
+        }
+        ans = i - 1;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
-    }
-    else cout << "NO" << ent;
-   
 }
 
 // Golden Rules
@@ -76,7 +76,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

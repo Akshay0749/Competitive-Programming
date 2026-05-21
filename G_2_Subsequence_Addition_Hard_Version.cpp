@@ -35,9 +35,9 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -49,18 +49,24 @@ ll nCr(long long n, long long r) {
 
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+    ll cnt = 0;
+    sort(a.begin(), a.end());
+    ll cur = 1;
+    if(a[0] != 1) {
+        cout << "NO" << ent;
+        return;
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    cur += a[0];
+    for(int i = 1; i < n; i++) {
+        if(a[i] >= cur) { // would need extra subsequence
+            cout << "NO" << ent;
+            return;
+        }
+        cur += a[i];
     }
-    else cout << "NO" << ent;
-   
+    cout << "YES" << ent;
 }
 
 // Golden Rules
@@ -76,7 +82,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }

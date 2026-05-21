@@ -8,6 +8,7 @@ typedef long double ld;
 typedef vector<int> vi;
 typedef vector<ld> vd;
 typedef vector<ll> vl;
+const int MOD = 1e9 + 7;
 
 #define FOR(i, a, b) for (int i=a; i<(b); i++)
 #define F0R(i, a) for (int i=0; i<(a); i++)
@@ -35,9 +36,9 @@ ll nCr(long long n, long long r) {
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -46,21 +47,38 @@ ll nCr(long long n, long long r) {
     
  
 */
-
 void solve() {
     ll n; cin >> n;
-    ll a = 0, b = 0, c = 0;
-    F0R(i, n) {
-        ll x, y, z; cin >> x >> y >> z;
-        a += x;
-        b += y;
-        c += z;
+    vl a(n);
+    F0R(i, n) cin >> a[i];
+    if(is_sorted(a.begin(), a.end())) { 
+        cout << "YES" << ent; 
+        return; 
     }
-    if(a == 0 && b == 0 && c == 0) {
-        cout << "YES" << ent;
+    ll req = 0;
+    F0R(i, n - 1) {
+        req = max(req, (a[i] - a[i + 1]));
     }
-    else cout << "NO" << ent;
-   
+    if(req == 0) { 
+        cout << "YES" << ent; 
+        return; 
+    }
+    bool ok = false;
+    ll m = 0;
+    F0R(i, n - 1) {
+        if(a[i] > a[i + 1]) {
+            if(ok && m < req) {
+                cout << "NO" << ent; 
+                return;
+            }
+            ok = true;
+            m = 0;
+        }
+        else if(ok) {
+            m = max(m, a[i + 1] - a[i]);
+        }
+    }
+    cout << "YES" << ent;
 }
 
 // Golden Rules
@@ -76,7 +94,7 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int T = 1;
-    //cin >> T;
+    cin >> T;
     while(T--) {
         solve();
     }
