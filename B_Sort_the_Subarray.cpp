@@ -33,9 +33,14 @@ typedef vector<ll> vl;
 // Claims on algo 
 /*  
     just find the longest non decreasing subsequence 
+        but it's not necessary that it has been choosen..
+
         .. then if last value of seq == f value of seq - 1
             then ans == len + 1
             else ans = len
+
+    // can the answer be longest increasing subsequence in a'
+        ..yessss
  
 */
 
@@ -43,25 +48,19 @@ void solve() {
     ll n; cin >> n;
     vl a(n), b(n);
     F0R(i, n) cin >> a[i];
-    F0R(i, n) cin >> a[i];
-    set<ll> s;
+    F0R(i, n) cin >> b[i];
+    ll l = 0, r = n - 1;
+
+    //first mismatch
+    while(l < n && a[l] == b[l]) ++l;
+    while(r >= 0 && a[r] == b[r]) --r;
+
+    //expansion
+    while(l > 0 && b[l - 1] <= b[l]) --l;
+    while(r < n - 1 && b[r] <= b[r + 1]) ++r;
     
-    ll len = 1, cnt = 0;
-
-    F0R(i, n) {
-        if(a[i] == b[i]) continue;
-
-        if(b[i] < a[i]) {
-            ++cnt;
-        }
-        else {
-            len = max(len, cnt);
-            cnt = 0;
-        }
-    }
-   
+    cout << l + 1 << ' ' << r + 1 << ent;
 }
-
 // Golden Rules
 /*
     Solutions are simple.
