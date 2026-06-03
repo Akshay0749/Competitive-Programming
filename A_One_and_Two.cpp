@@ -20,34 +20,22 @@
         ll n;
         cin >> n;
         vl a(n);
-        ll cnt_2 = 0;
         F0R(i, n){
             cin >> a[i];
-            if(a[i] == 2) cnt_2+=1;
         }
-        if (cnt_2 == 0){
-            cout << 1 << ent;
-            return;
-        }
-        else if(cnt_2 % 2 == 0){
-            ll cur_2 = 0;
-            ll ans = 0;
-            F0R(i, n){
-                if(a[i] == 1){
-                    ans++;
-                }               
-                if(a[i] == 2){
-                    cur_2+=1;
-                    ans+=1;
-
-                }
-                if(cur_2 == (cnt_2 / 2)){
-                    cout << ans << ent;
-                    return;
-                }
+        ll curP = 0;
+        F0R(i, n) {
+            if(a[i] == 2) ++curP;
+            ll eP = 0;
+            FOR(j, i + 1, n) {
+                if(a[j] == 2) ++eP;
             }
-            
+            if(curP == eP) {
+                cout << i + 1 << ent;
+                return;
+            }
         }
+
         cout << -1 << ent;
     }
 
