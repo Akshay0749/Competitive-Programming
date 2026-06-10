@@ -8,6 +8,7 @@ typedef long double ld;
 typedef vector<int> vi;
 typedef vector<ld> vd;
 typedef vector<ll> vl;
+const int MOD = 1e9 + 7;
 
 #define FOR(i, a, b) for (int i=a; i<(b); i++)
 #define F0R(i, a) for (int i=0; i<(a); i++)
@@ -15,6 +16,17 @@ typedef vector<ll> vl;
 #define F0Rd(i,a) for (int i = (a)-1; i >= 0; i--)
 #define trav(a,x) for (auto& a : x)
 #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
+
+ll nCr(long long n, long long r) {
+    if(r > n) return 0;
+    if(r > n - r) r = n - r;
+    long long res = 1;
+    for(ll i = 0; i < r; i++) {
+       res = res * (n - i);
+       res = res / (i + 1);
+    }
+    return res;
+}
 
 // Problem Statement
 /*
@@ -24,9 +36,9 @@ typedef vector<ll> vl;
 // Small Observatins
 /*
  
-*/
+ 
 
-/*
+ 
  
 */
 
@@ -38,43 +50,29 @@ typedef vector<ll> vl;
 
 void solve() {
     string s; cin >> s;
-    ll ans = 0;
     ll n = s.length();
-    ll f1 = 0, f2 = 0;
-    if(s[0] == 'u') {
-        s[0] = 's';
-        ans++;
-    }
-    vl a;
-    F0R(i, n){
-        if(s[i] == 's') f1++;
-        else{
-            a.push_back(f1);
-            f1 = 0;
-        }
-    }
-    map<int, int> f;
-    F0R(i, a.size()){
-        f[a[i]]++;
-    }
-    ll mxf = 0, mxfe = 0;
-    for (auto const& pair : f) {
-        if (pair.second > mxf) {
-            mxf = pair.second;
-            mxfe = pair.first;   
-        } else if (pair.second == mxf && pair.first > mxfe) {
-            mxfe = pair.first;
-        }
-    }
-    F0R(i, n){
-        if(a[i] == mxfe) continue;
-        else ans += abs(mxfe - a[i]);
-    }
-    if(a.size() == 0){
+    ll cnt = count(s.begin(), s.end(), 'u');
+    if(cnt == 0) {
         cout << 0 << ent;
+        return;
     }
-    else cout << ans << ent;
-
+    ll ans = 0;
+    FOR(i, 1, n - 1) {
+        if(s[i] == 'u') {
+            if(s[i - 1] == 'u') {
+                s[i - 1] = 's';
+                ans += 1;
+            }
+            if(s[i + 1] == 'u') {
+                s[i + 1] = 's';
+                ans += 1;
+            }
+        }
+    }
+    if(s[n - 1] == 'u') ans += 1;
+    if(s[0] == 'u') ans += 1;
+    // cout << n << ent;
+    cout << ans << ent;
 }
 
 // Golden Rules
