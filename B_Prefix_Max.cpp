@@ -42,7 +42,7 @@ void solve() {
     F0R(i, n) cin >> a[i];
     ll x = *max_element(a.begin(), a.end());
     cout << x * n << ent;
-   
+    
 }
 
 // Golden Rules
